@@ -21,6 +21,7 @@ const Header = styled.header`
 const MsgContainer = styled.div`
     padding: 20px;
     border-radius: 3px;
+    width: 80%;
     color: ${props => props.color};
     background-color: ${props => props.bkcolor};
     border: 1px solid ${props => props.bdrcolor};
@@ -41,7 +42,8 @@ const SpinnerContainer = styled.div`
 `;
 
 const ResultContainer = styled.div`
-    padding-top: 20px;
+    ${common};
+    padding-top: 20px;    
 `;
 
 const SearchNews = ({hasInitData, initArticles, onItemClickHandler, onShowDetailsHandler, showDetails}) => {
