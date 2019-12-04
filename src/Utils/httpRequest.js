@@ -5,7 +5,7 @@ import { makeUrl } from 'Utils/helper';
 export const useFetch = (hasInitData, initData, url, hasApiKey) => {
     const [query, setQuery] = useState('');
     const [search, setSearch] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(!hasInitData && true);
     const [error, setError] = useState({ hasError: false, code: '', message: ''});
     const [data, setData] = useState(initData);
     const [hasData, setHasData] = useState(hasInitData);
@@ -24,8 +24,13 @@ export const useFetch = (hasInitData, initData, url, hasApiKey) => {
         }
 
         const handleData = data => {
-            setIsLoading(false);      
-            data.status === 'error' ? handleFetchError(data) : setData(data);
+            setIsLoading(false);    
+            if(data.status === 'error'){
+                handleFetchError(data)
+            } else {
+                setData(data);
+                setError({ hasError: false, code: '', message: '' });
+            }
         }
 
         const fetchData = async () => {

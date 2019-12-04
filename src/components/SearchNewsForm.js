@@ -2,18 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 import {SearchButton} from 'components/Button';
 
-const common = `
-    margin-top: 8px;
-`;
-
-const StyleLabel = styled.label`
-    ${common};
+const SearchForm = styled.form`
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    @media screen and (min-width: 600px) {
+        flex-direction: row;
+    }
 `;
 
 const StyledInput = styled.input`
-    ${common};
     display: block;
     padding: 6px;
+    margin: 5px 0;
     border: 1px solid grey;
     box-sizing : border-box;
     width: 100%;
@@ -24,8 +27,8 @@ const StyledInput = styled.input`
 `;
 
 const SearchNewsForm = ({label, value, onChangeHandler, onClickHandler}) => (
-    <form>
-        <StyleLabel  htmlFor='country_code'>
+    <SearchForm>
+        <label  htmlFor='country_code'>
             {`${label}`}
             <StyledInput 
                 type='text' 
@@ -33,9 +36,9 @@ const SearchNewsForm = ({label, value, onChangeHandler, onClickHandler}) => (
                 id={'country_code'}
                 name='country_code'
                 onChange={(event) => onChangeHandler(event)}/>
-        </StyleLabel>
+        </label>
         <SearchButton label={'Search'} onClickHandler={onClickHandler}/>
-    </form>
+    </SearchForm>
 );
 
 export default SearchNewsForm;

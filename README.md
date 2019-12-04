@@ -8,7 +8,7 @@ React application for searching news, base in country code.
 
 ## Installation
 
-npm i news-app
+### npm install
 
 ## How to run
 

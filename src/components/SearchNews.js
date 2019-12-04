@@ -18,10 +18,12 @@ const Header = styled.header`
     padding-top: 10px;
 `;
 
-const ErrorContainer = styled.div`
-    padding-top: 20px;
-    ${common}
-    color: red;
+const MsgContainer = styled.div`
+    padding: 20px;
+    border-radius: 3px;
+    color: ${props => props.color};
+    background-color: ${props => props.bkcolor};
+    border: 1px solid ${props => props.bdrcolor};
 `;
 
 const NewsContainer = styled.main`
@@ -38,7 +40,7 @@ const SpinnerContainer = styled.div`
     height: 100px;
 `;
 
-const MsgResult = styled.div`
+const ResultContainer = styled.div`
     padding-top: 20px;
 `;
 
@@ -79,28 +81,39 @@ const SearchNews = ({hasInitData, initArticles, onItemClickHandler, onShowDetail
                     value={query} 
                     onChangeHandler={onChangeHandler}
                     onClickHandler={onClickHandler}/>                    
-            </Header>            
-            {error.hasError && <ErrorContainer>{error.message}</ErrorContainer>}
-            <NewsContainer>
+            </Header>
+            <NewsContainer>                
                 {
-                    isLoading 
+                    isLoading
                     ? <SpinnerContainer>
-                            <ReactLoading 
-                            type={'spin'} 
-                            color={'black'} 
-                            height={'50px'} 
-                            width={'50px'} />
+                        <ReactLoading 
+                        type={'spin'} 
+                        color={'black'} 
+                        height={'50px'} 
+                        width={'50px'} />
                       </SpinnerContainer>
-                    : <MsgResult>
-                        {   
-                            articles.length
+                    : <ResultContainer>
+                        {
+                            error.hasError
+                            && 
+                            <MsgContainer color={'#721c24'} bkcolor={'#f8d7da'} bdrcolor={'#f5c6cb'}>
+                                {error.message}
+                            </MsgContainer>
+                        }
+                        {
+                            articles.length && !error.hasError
                             ? <ItemsList 
                                 items={articles} 
                                 onItemClickHandler={onItemClickHandler}
                                 onShowDetailsHandler={onShowDetailsHandler}/>
-                            : NO_RESULTS
+                            : !error.hasError && <MsgContainer 
+                                color={'#0c5460'} 
+                                bkcolor={'#d1ecf1'} 
+                                bdrcolor={'#bee5eb'}>
+                                {NO_RESULTS}
+                            </MsgContainer>
                         }
-                      </MsgResult>                        
+                      </ResultContainer>                       
                 }
             </NewsContainer>
         </Fragment>
