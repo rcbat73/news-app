@@ -8,9 +8,10 @@ React application for searching news, base in country code.
 
 ## Installation
 
-### npm install
+In the project directory, run:
+### `npm install`
 
 ## How to run
 
-In the project directory, you can run:
+In the project directory, run:
 ### `npm start`
